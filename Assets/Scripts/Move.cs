@@ -5,35 +5,31 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     public float Speed = 0;
+    public float JumpHeight = 0; //Für das Platformer Beispiel
+
+    private Rigidbody2D _physics = null;
+
+    private void Start()
+    {
+        _physics = GetComponent<Rigidbody2D>();
+    }
 
     private void FixedUpdate()
     {
-        Vector3 move = Vector3.zero;
-
-        // ---------- option 1 (bitte nicht so)
-
-        /*if (Input.GetKey(KeyCode.UpArrow))
-        {
-            move += Vector3.up;
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            move += Vector3.down;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            move += Vector3.left;
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            move += Vector3.right;
-        }*/
-
-        // ---------- option 2 (so is besser)
+        Vector3 move = Vector3.zero;      
 
         move.x = Input.GetAxis("Horizontal");
         move.y = Input.GetAxis("Vertical");
 
-        transform.position += move * Speed * .01f;
+        _physics.velocity = move * Speed;
+
+        // Für Platformer zb.
+
+        /*if (Input.GetButtonDown("Jump"))
+        {
+            _physics.AddForce(Vector2.up * JumpHeight);
+        }
+
+        _physics.velocity = new Vector2(move.x * Speed, _physics.velocity.y);*/
     }
 }
