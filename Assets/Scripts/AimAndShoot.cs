@@ -6,11 +6,15 @@ public class AimAndShoot : MonoBehaviour
 {
     public GameObject Projectile = null;
 
+    public AudioSource Source = null;
+    public AudioClip Clip = null;
+
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
             Instantiate(Projectile, transform.position + transform.up * 2, this.transform.rotation);
+            Source.PlayOneShot(Clip);
         }
     }
 
