@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,8 +16,10 @@ public class Projectile : MonoBehaviour
         rig.velocity = this.transform.up.normalized * Speed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag == "damage")
+            return;
         Destroy(this.gameObject);
     }
 }

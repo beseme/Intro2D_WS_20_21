@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,9 +23,9 @@ public class Health : MonoBehaviour
         Bar.fillAmount = 1;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(collision.gameObject.tag == "damage")
+        if(other.gameObject.tag == "damage")
         {
             hp -= 1;
             Bar.fillAmount = getPercentage();
